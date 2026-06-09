@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World — DailyDrift</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1612; --mid: #4a4540; --muted: #9a9490;
+      --rule: #d8d2ca; --cream: #faf8f4; --paper: #ffffff;
+      --accent: #b5371a; --accent2: #1a3b5c;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+
+    .ticker { background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; overflow: hidden; display: flex; align-items: center; }
+    .ticker-label { background: var(--ink); padding: 0.45rem 1rem; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.1em; }
+    .ticker-track { display: flex; animation: ticker 28s linear infinite; white-space: nowrap; padding: 0.45rem 0; }
+    .ticker-track span { padding: 0 2.5rem; }
+    .ticker-track span::after { content: '·'; margin-left: 2.5rem; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .masthead { background: var(--paper); border-bottom: 3px double var(--ink); text-align: center; padding: 1.5rem 1rem 1rem; }
+    .masthead-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -0.02em; }
+    .masthead-title span { color: var(--accent); }
+
+    nav { background: var(--ink); display: flex; justify-content: center; flex-wrap: wrap; }
+    nav a { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #ccc; padding: 0.7rem 1.4rem; border-right: 1px solid #333; transition: color 0.2s, background 0.2s; }
+    nav a:first-child { border-left: 1px solid #333; }
+    nav a:hover, nav a.active { color: #fff; background: var(--accent); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* CATEGORY HERO */
+    .cat-hero { background: var(--ink); color: #fff; padding: 2.5rem 0; margin-bottom: 2.5rem; }
+    .cat-hero-inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .cat-label { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .cat-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1; }
+    .cat-desc { font-size: 0.95rem; color: #aaa; max-width: 420px; line-height: 1.6; }
+    .cat-count { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: #666; white-space: nowrap; }
+
+    /* FEATURED */
+    .featured-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 2.5rem; }
+    .feat-main { background: var(--paper); }
+    .feat-main img { height: 320px; }
+    .feat-main-body { padding: 1.5rem 1.8rem 1.8rem; }
+    .feat-stack { display: flex; flex-direction: column; gap: 1.5px; background: var(--rule); }
+    .feat-small { background: var(--paper); padding: 1.2rem; display: flex; flex-direction: column; flex: 1; }
+    .feat-small img { height: 110px; margin-bottom: 0.8rem; }
+
+    .eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .feat-main-body h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.7rem; }
+    .feat-main-body h2 a:hover { color: var(--accent); }
+    .feat-main-body p { font-size: 0.95rem; color: var(--mid); margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .feat-small h3 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.4rem; }
+    .feat-small h3 a:hover { color: var(--accent); }
+    .feat-small p { font-size: 0.82rem; color: var(--mid); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    .byline { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--muted); }
+    .byline strong { color: var(--ink); font-weight: 500; }
+
+    /* FILTER BAR */
+    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center; }
+    .filter-bar span { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 0.5rem; }
+    .filter-btn { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--rule); background: var(--paper); color: var(--mid); padding: 0.35rem 0.9rem; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    /* ARTICLE LIST */
+    .article-list { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; }
+
+    .list-wrap {}
+    .section-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; white-space: nowrap; }
+    .section-head::after { content: ''; flex: 1; height: 2px; background: var(--ink); }
+
+    .list-item { display: grid; grid-template-columns: 160px 1fr; gap: 1.2rem; padding: 1.4rem 0; border-bottom: 1px solid var(--rule); align-items: start; }
+    .list-item img { height: 110px; }
+    .list-item-body {}
+    .list-item h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.4rem; }
+    .list-item h3 a:hover { color: var(--accent); }
+    .list-item p { font-size: 0.875rem; color: var(--mid); margin-bottom: 0.6rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .list-meta { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; color: var(--muted); }
+
+    .load-more { display: block; width: 100%; margin-top: 1.5rem; padding: 0.9rem; background: var(--paper); border: 2px solid var(--ink); font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); cursor: pointer; transition: all 0.2s; text-align: center; }
+    .load-more:hover { background: var(--ink); color: #fff; }
+
+    /* SIDEBAR */
+    .sidebar-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); margin-bottom: 1rem; }
+    .sidebar-section { margin-bottom: 2rem; }
+    .sidebar-item { display: flex; gap: 0.8rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule); }
+    .sidebar-item img { width: 70px; height: 55px; flex-shrink: 0; }
+    .sidebar-item h4 { font-family: 'Playfair Display', serif; font-size: 0.88rem; font-weight: 700; line-height: 1.3; }
+    .sidebar-item h4 a:hover { color: var(--accent); }
+    .sidebar-item p { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .topics-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .topic-tag { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--rule); padding: 0.3rem 0.7rem; color: var(--mid); transition: all 0.2s; }
+    .topic-tag:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    footer { background: var(--ink); color: #888; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; margin-top: 3rem; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; }
+
+    @media (max-width: 900px) {
+      .featured-grid { grid-template-columns: 1fr; }
+      .feat-stack { flex-direction: row; }
+      .article-list { grid-template-columns: 1fr; }
+      .list-item { grid-template-columns: 120px 1fr; }
+    }
+    @media (max-width: 600px) {
+      .feat-stack { flex-direction: column; }
+      .list-item { grid-template-columns: 90px 1fr; }
+      .list-item img { height: 75px; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-label">Breaking</div>
+  <div class="ticker-track">
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="container">
+    <a href="index.html"><div class="masthead-title">Daily<span>Drift</span></div></a>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="category.html" class="active">World</a>
+  <a href="#">Politics</a>
+  <a href="#">Business</a>
+  <a href="#">Technology</a>
+  <a href="#">Science</a>
+  <a href="#">Culture</a>
+  <a href="#">Opinion</a>
+</nav>
+
+<!-- CATEGORY HERO -->
+<div class="cat-hero">
+  <div class="container">
+    <div class="cat-hero-inner">
+      <div>
+        <div class="cat-label">Section</div>
+        <div class="cat-title">World</div>
+        <p class="cat-desc">International reporting from every corner of the globe — conflicts, diplomacy, societies, and the stories that shape our shared future.</p>
+      </div>
+      <div class="cat-count">247 stories this month</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="container">
+
+    <!-- FEATURED -->
+    <div class="featured-grid">
+      <article class="feat-main">
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80" alt="Climate"/>
+        <div class="feat-main-body">
+          <div class="eyebrow">Top Story</div>
+          <h2><a href="article.html">Global Climate Accord Marks a Turning Point as 180 Nations Commit to Net-Zero by 2045</a></h2>
+          <p>Delegates from 180 nations signed the landmark Geneva Climate Accord, setting binding carbon neutrality targets and establishing a $500 billion green transition fund.</p>
+          <div class="byline">By <strong>Eleanor Marsh</strong> · June 9, 2026 · 6 min read</div>
+        </div>
+      </article>
+
+      <div class="feat-stack">
+        <article class="feat-small">
+          <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80" alt="Tech"/>
+          <div class="eyebrow">Technology</div>
+          <h3><a href="article.html">AI Chip Exports Draw New Restrictions Amid Rising Tensions</a></h3>
+          <p>Washington moves to tighten advanced semiconductor shipment controls.</p>
+        </article>
+        <article class="feat-small">
+          <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=400&q=80" alt="Politics"/>
+          <div class="eyebrow">Politics</div>
+          <h3><a href="article.html">European Leaders Meet in Brussels Over Migration Policy Overhaul</a></h3>
+          <p>A new framework aims to distribute responsibility more evenly across member states.</p>
+        </article>
+      </div>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-bar">
+      <span>Filter:</span>
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Politics</button>
+      <button class="filter-btn">Conflict</button>
+      <button class="filter-btn">Diplomacy</button>
+      <button class="filter-btn">Economy</button>
+      <button class="filter-btn">Climate</button>
+    </div>
+
+    <!-- ARTICLES + SIDEBAR -->
+    <div class="article-list">
+      <section class="list-wrap">
+        <div class="section-head"><h2>All World Stories</h2></div>
+
+        <article class="list-item">
+          <img src="https://images.unsplash.com/photo-1532094349884-543559b8c9d7?w=400&q=80" alt=""/>
+          <div class="list-item-body">
+            <div class="eyebrow">Science & Policy</div>
+            <h3><a href="article.html">Arctic Ice Loss Accelerates as New Data Surpasses Worst-Case Projections</a></h3>
+            <p>Satellite measurements show Arctic summer sea ice at its lowest recorded extent, raising alarm among climate scientists worldwide.</p>
+            <div class="list-meta">Dr. Yuki Tanaka · June 8, 2026 · 5 min read</div>
+          </div>
+        </article>
+
+        <article class="list-item">
+          <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&q=80" alt=""/>
+          <div class="list-item-body">
+            <div class="eyebrow">Economy</div>
+            <h3><a href="article.html">IMF Revises Global Growth Forecast Upward, Cites Resilient Consumer Demand</a></h3>
+            <p>The fund raised its 2026 global GDP forecast to 3.4%, up from 3.1% projected in April, driven by stronger-than-expected performance in Asia and North America.</p>
+            <div class="list-meta">Marcus Drell · June 8, 2026 · 4 min read</div>
+          </div>
+        </article>
+
+        <article class="list-item">
+          <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=400&q=80" alt=""/>
+          <div class="list-item-body">
+            <div class="eyebrow">Conflict</div>
+            <h3><a href="article.html">Ceasefire Holds in Eastern Region as Humanitarian Corridors Open</a></h3>
+            <p>Aid organizations cautiously welcomed the pause in fighting, with the first convoy of food and medical supplies reaching isolated communities after weeks of blockade.</p>
+            <div class="list-meta">Ama Osei · June 7, 2026 · 6 min read</div>
+          </div>
+        </article>
+
+        <article class="list-item">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&q=80" alt=""/>
+          <div class="list-item-body">
+            <div class="eyebrow">Diplomacy</div>
+            <h3><a href="article.html">G20 Summit Ends With Pledge to Reform Global Tax Architecture</a></h3>
+            <p>Finance ministers agreed to accelerate implementation of the global minimum corporate tax rate and close loopholes that have allowed multinationals to shift profits offshore.</p>
+            <div class="list-meta">James Okoro · June 7, 2026 · 7 min read</div>
+          </div>
+        </article>
+
+        <article class="list-item">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80" alt=""/>
+          <div class="list-item-body">
+            <div class="eyebrow">Society</div>
+            <h3><a href="article.html">A New Generation of Activists Is Reshaping How Countries Think About Mental Health Policy</a></h3>
+            <p>Youth-led campaigns across Europe, Asia, and Latin America are pushing governments to treat mental health with the same urgency as physical health crises.</p>
+            <div class="list-meta">Sofia Reinholt · June 6, 2026 · 8 min read</div>
+          </div>
+        </article>
+
+        <article class="list-item">
+          <img src="https://images.unsplash.com/photo-1584467735867-4297ae2ebcee?w=400&q=80" alt=""/>
+          <div class="list-item-body">
+            <div class="eyebrow">Health</div>
+            <h3><a href="article.html">WHO Warns of Growing Antimicrobial Resistance as a Global Health Emergency</a></h3>
+            <p>Drug-resistant infections now kill more people globally than HIV and malaria combined, according to a landmark WHO report released Monday.</p>
+            <div class="list-meta">Dr. Priya Nair · June 6, 2026 · 5 min read</div>
+          </div>
+        </article>
+
+        <button class="load-more">Load More Stories</button>
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside>
+        <div class="sidebar-section">
+          <div class="sidebar-label">Trending in World</div>
+          <div class="sidebar-item">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=200&q=80" alt=""/>
+            <div><h4><a href="article.html">Europe's New Data Act Reshapes Consumer Rights</a></h4><p>Technology · 5 min</p></div>
+          </div>
+          <div class="sidebar-item">
+            <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=200&q=80" alt=""/>
+            <div><h4><a href="article.html">Senate Passes Historic Infrastructure Bill</a></h4><p>Politics · 8 min</p></div>
+          </div>
+          <div class="sidebar-item">
+            <img src="https://images.unsplash.com/photo-1532094349884-543559b8c9d7?w=200&q=80" alt=""/>
+            <div><h4><a href="article.html">Room-Temperature Superconductivity Achieved</a></h4><p>Science · 4 min</p></div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-label">Topics</div>
+          <div class="topics-cloud">
+            <a href="#" class="topic-tag">Climate</a>
+            <a href="#" class="topic-tag">NATO</a>
+            <a href="#" class="topic-tag">China</a>
+            <a href="#" class="topic-tag">Middle East</a>
+            <a href="#" class="topic-tag">EU</a>
+            <a href="#" class="topic-tag">Trade</a>
+            <a href="#" class="topic-tag">Refugees</a>
+            <a href="#" class="topic-tag">UN</a>
+            <a href="#" class="topic-tag">G20</a>
+            <a href="#" class="topic-tag">Africa</a>
+            <a href="#" class="topic-tag">Asia</a>
+            <a href="#" class="topic-tag">Democracy</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 DailyDrift. All rights reserved.</span>
+      <span><a href="index.html" style="color:#888">← Back to Home</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

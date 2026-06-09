@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — DailyDrift</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1612; --mid: #4a4540; --muted: #9a9490;
+      --rule: #d8d2ca; --cream: #faf8f4; --paper: #ffffff;
+      --accent: #b5371a; --accent2: #1a3b5c;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; line-height: 1.8; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+
+    .ticker { background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; overflow: hidden; display: flex; align-items: center; }
+    .ticker-label { background: var(--ink); padding: 0.45rem 1rem; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.1em; }
+    .ticker-track { display: flex; animation: ticker 28s linear infinite; white-space: nowrap; padding: 0.45rem 0; }
+    .ticker-track span { padding: 0 2.5rem; }
+    .ticker-track span::after { content: '·'; margin-left: 2.5rem; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .masthead { background: var(--paper); border-bottom: 3px double var(--ink); text-align: center; padding: 1.5rem 1rem 1rem; }
+    .masthead-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -0.02em; }
+    .masthead-title span { color: var(--accent); }
+
+    nav { background: var(--ink); display: flex; justify-content: center; flex-wrap: wrap; }
+    nav a { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #ccc; padding: 0.7rem 1.4rem; border-right: 1px solid #333; transition: color 0.2s, background 0.2s; }
+    nav a:first-child { border-left: 1px solid #333; }
+    nav a:hover { color: #fff; background: var(--accent); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* PAGE HERO */
+    .page-hero { background: var(--ink); color: #fff; padding: 4rem 0; text-align: center; }
+    .page-hero .label { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+    .page-hero p { font-size: 1.1rem; color: #aaa; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+    /* MISSION */
+    .mission { padding: 4rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .mission-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.2rem; }
+    .mission-text p { font-size: 1rem; color: var(--mid); margin-bottom: 1rem; }
+    .mission-img img { height: 400px; }
+    .mission-img { border: 8px solid var(--paper); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+
+    /* VALUES */
+    .values { background: var(--paper); padding: 4rem 0; }
+    .values-head { text-align: center; margin-bottom: 3rem; }
+    .values-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; margin-bottom: 0.5rem; }
+    .values-head p { color: var(--muted); font-size: 0.95rem; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .value-card { padding: 2rem; border: 1px solid var(--rule); }
+    .value-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--rule); line-height: 1; margin-bottom: 0.5rem; }
+    .value-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .value-card p { font-size: 0.875rem; color: var(--mid); line-height: 1.7; }
+
+    /* STATS */
+    .stats { background: var(--accent); color: #fff; padding: 3.5rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; }
+
+    /* TEAM */
+    .team { padding: 4rem 0; }
+    .team-head { margin-bottom: 2.5rem; }
+    .team-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; margin-bottom: 0.5rem; }
+    .team-head p { color: var(--muted); font-size: 0.95rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .team-card { background: var(--paper); }
+    .team-card img { height: 220px; }
+    .team-card-body { padding: 1rem 1.2rem 1.2rem; }
+    .team-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .team-card .role { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .team-card p { font-size: 0.82rem; color: var(--mid); }
+
+    /* CONTACT */
+    .contact { background: var(--ink); color: #fff; padding: 4rem 0; }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; margin-bottom: 1rem; }
+    .contact p { color: #aaa; font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .contact-detail { margin-bottom: 1rem; }
+    .contact-detail .label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.2rem; }
+    .contact-detail p { color: #ccc; font-size: 0.9rem; margin: 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input, .contact-form textarea {
+      background: #2a2520; border: 1px solid #333; color: #fff;
+      font-family: 'Source Serif 4', serif; font-size: 0.9rem;
+      padding: 0.8rem 1rem; outline: none; transition: border-color 0.2s;
+      width: 100%;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form textarea { height: 120px; resize: vertical; }
+    .contact-form button {
+      background: var(--accent); color: #fff; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.9rem; cursor: pointer; transition: background 0.2s;
+    }
+    .contact-form button:hover { background: #8a2910; }
+
+    footer { background: #111; color: #888; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; }
+
+    @media (max-width: 900px) {
+      .mission { grid-template-columns: 1fr; gap: 2rem; }
+      .mission-img { order: -1; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-label">Breaking</div>
+  <div class="ticker-track">
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="container">
+    <a href="index.html"><div class="masthead-title">Daily<span>Drift</span></div></a>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="category.html">World</a>
+  <a href="#">Politics</a>
+  <a href="#">Business</a>
+  <a href="#">Technology</a>
+  <a href="#">Science</a>
+  <a href="#">Culture</a>
+  <a href="#">Opinion</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="label">Who We Are</div>
+    <h1>Built on Trust.<br/>Driven by Truth.</h1>
+    <p>DailyDrift is an independent newsroom dedicated to rigorous, fair, and fearless journalism — serving readers who believe that an informed public is the foundation of a healthy society.</p>
+  </div>
+</div>
+
+<main>
+
+  <!-- MISSION -->
+  <div class="container">
+    <div class="mission">
+      <div class="mission-text">
+        <h2>Our Mission Is Simple: Tell the Truth, Every Day</h2>
+        <p>Founded in 2024, DailyDrift was built on the belief that quality journalism doesn't have to be locked behind paywalls, diluted by clickbait, or distorted by political agendas. We cover the stories that matter — from the corridors of power to the communities that rarely make headlines.</p>
+        <p>We are editorially independent. No corporation owns our newsroom. No advertiser dictates our coverage. Our only obligation is to our readers and to the truth.</p>
+        <p>Every story we publish goes through a rigorous verification process. Our reporters work in the field, our editors push for clarity, and our standards team holds everyone accountable — including us.</p>
+      </div>
+      <div class="mission-img">
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=80" alt="Newsroom"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values">
+    <div class="container">
+      <div class="values-head">
+        <h2>What We Stand For</h2>
+        <p>Six principles that guide every story we tell.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-num">01</div>
+          <h3>Independence</h3>
+          <p>We answer to no political party, no corporation, and no advertiser. Our editorial decisions are made by journalists, not boardrooms.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-num">02</div>
+          <h3>Accuracy</h3>
+          <p>Every claim is verified. Every source is evaluated. We correct our mistakes quickly, prominently, and without excuses.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-num">03</div>
+          <h3>Fairness</h3>
+          <p>We represent all sides of complex issues honestly, giving voice to perspectives that challenge our own assumptions.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-num">04</div>
+          <h3>Transparency</h3>
+          <p>We explain how we report, who our sources are where possible, and how our newsroom is funded.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-num">05</div>
+          <h3>Courage</h3>
+          <p>We pursue the stories that powerful people would prefer go untold — and we publish them anyway.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-num">06</div>
+          <h3>Service</h3>
+          <p>We exist to serve our readers and the public interest — not to accumulate traffic, clicks, or influence for their own sake.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-num">4.2M</div>
+          <div class="stat-label">Monthly Readers</div>
+        </div>
+        <div>
+          <div class="stat-num">180+</div>
+          <div class="stat-label">Countries Reached</div>
+        </div>
+        <div>
+          <div class="stat-num">47</div>
+          <div class="stat-label">Staff Journalists</div>
+        </div>
+        <div>
+          <div class="stat-num">2024</div>
+          <div class="stat-label">Year Founded</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="team">
+    <div class="container">
+      <div class="team-head">
+        <h2>The People Behind the Stories</h2>
+        <p>Our team spans six continents and brings decades of combined reporting experience.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Eleanor Marsh"/>
+          <div class="team-card-body">
+            <h3>Eleanor Marsh</h3>
+            <div class="role">Senior World Correspondent</div>
+            <p>Based in Geneva. Covers international diplomacy and climate policy.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Marcus Drell"/>
+          <div class="team-card-body">
+            <h3>Marcus Drell</h3>
+            <div class="role">Business & Economics Editor</div>
+            <p>Former financial analyst covering markets, trade, and global finance.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80" alt="Ama Osei"/>
+          <div class="team-card-body">
+            <h3>Ama Osei</h3>
+            <div class="role">Africa Bureau Chief</div>
+            <p>Based in Accra. Covers politics, society, and culture across the continent.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="James Okoro"/>
+          <div class="team-card-body">
+            <h3>James Okoro</h3>
+            <div class="role">Politics Correspondent</div>
+            <p>Tracks legislative developments, elections, and policy across Washington.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div>
+          <h2>Get in Touch</h2>
+          <p>Whether you're a reader with feedback, a source with a tip, or an organization looking to partner — we'd love to hear from you.</p>
+          <div class="contact-detail">
+            <div class="label">Editorial Tips</div>
+            <p>tips@dailydrift.com</p>
+          </div>
+          <div class="contact-detail">
+            <div class="label">General Inquiries</div>
+            <p>hello@dailydrift.com</p>
+          </div>
+          <div class="contact-detail">
+            <div class="label">Press & Partnerships</div>
+            <p>press@dailydrift.com</p>
+          </div>
+        </div>
+        <div>
+          <div class="contact-form">
+            <input type="text" placeholder="Your name"/>
+            <input type="email" placeholder="Email address"/>
+            <input type="text" placeholder="Subject"/>
+            <textarea placeholder="Your message..."></textarea>
+            <button type="button">Send Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 DailyDrift. All rights reserved.</span>
+      <span><a href="index.html" style="color:#888">← Back to Home</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

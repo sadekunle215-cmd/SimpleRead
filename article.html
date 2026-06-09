@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Climate Accord — DailyDrift</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1612; --mid: #4a4540; --muted: #9a9490;
+      --rule: #d8d2ca; --cream: #faf8f4; --paper: #ffffff;
+      --accent: #b5371a; --accent2: #1a3b5c;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; line-height: 1.8; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+
+    /* TICKER */
+    .ticker { background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; overflow: hidden; display: flex; align-items: center; }
+    .ticker-label { background: var(--ink); padding: 0.45rem 1rem; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.1em; }
+    .ticker-track { display: flex; animation: ticker 28s linear infinite; white-space: nowrap; padding: 0.45rem 0; }
+    .ticker-track span { padding: 0 2.5rem; }
+    .ticker-track span::after { content: '·'; margin-left: 2.5rem; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* MASTHEAD */
+    .masthead { background: var(--paper); border-bottom: 3px double var(--ink); text-align: center; padding: 1.5rem 1rem 1rem; }
+    .masthead-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -0.02em; }
+    .masthead-title span { color: var(--accent); }
+
+    /* NAV */
+    nav { background: var(--ink); display: flex; justify-content: center; flex-wrap: wrap; }
+    nav a { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #ccc; padding: 0.7rem 1.4rem; border-right: 1px solid #333; transition: color 0.2s, background 0.2s; }
+    nav a:first-child { border-left: 1px solid #333; }
+    nav a:hover { color: #fff; background: var(--accent); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ARTICLE LAYOUT */
+    .article-wrap { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; padding: 3rem 0; }
+
+    /* ARTICLE MAIN */
+    .article-main {}
+    .breadcrumb { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { color: var(--accent); }
+    .article-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem; }
+    .article-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: 1rem; }
+    .article-deck { font-size: 1.15rem; font-style: italic; color: var(--mid); border-left: 3px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .article-meta { display: flex; align-items: center; gap: 1.2rem; padding: 1rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; }
+    .article-meta strong { color: var(--ink); }
+    .article-meta .dot { color: var(--rule); }
+
+    .hero-img { margin-bottom: 0.5rem; height: 420px; }
+    .img-caption { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--muted); margin-bottom: 2rem; padding-top: 0.4rem; border-top: 1px solid var(--rule); }
+
+    .article-body p { font-size: 1.05rem; margin-bottom: 1.4rem; color: var(--ink); }
+    .article-body h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin: 2.2rem 0 0.8rem; }
+    .article-body blockquote { border-left: 4px solid var(--accent); margin: 2rem 0; padding: 0.8rem 1.5rem; background: var(--paper); }
+    .article-body blockquote p { font-size: 1.15rem; font-style: italic; color: var(--mid); margin-bottom: 0.3rem; }
+    .article-body blockquote cite { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--muted); font-style: normal; }
+
+    .article-tags { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag { display: inline-block; background: var(--ink); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; }
+    .tag:hover { background: var(--accent); }
+
+    /* SHARE */
+    .share-bar { display: flex; gap: 0.7rem; margin-top: 1.5rem; align-items: center; }
+    .share-bar span { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .share-btn { background: var(--ink); color: #fff; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.5rem 1rem; cursor: pointer; transition: background 0.2s; }
+    .share-btn:hover { background: var(--accent); }
+
+    /* RELATED */
+    .related { margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid var(--ink); }
+    .related h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; margin-bottom: 1.2rem; }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--rule); }
+    .related-card { background: var(--paper); display: flex; gap: 0.8rem; padding: 1rem; }
+    .related-card img { width: 80px; height: 60px; flex-shrink: 0; }
+    .related-card h4 { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; line-height: 1.3; }
+    .related-card h4 a:hover { color: var(--accent); }
+    .related-card p { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; color: var(--muted); margin-top: 0.3rem; }
+
+    /* SIDEBAR */
+    .sidebar {}
+    .sidebar-section { margin-bottom: 2rem; }
+    .sidebar-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); margin-bottom: 1rem; }
+    .sidebar-item { display: flex; gap: 0.8rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule); }
+    .sidebar-item img { width: 70px; height: 55px; flex-shrink: 0; }
+    .sidebar-item h4 { font-family: 'Playfair Display', serif; font-size: 0.88rem; font-weight: 700; line-height: 1.3; }
+    .sidebar-item h4 a:hover { color: var(--accent); }
+    .sidebar-item p { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .author-box { background: var(--paper); border: 1px solid var(--rule); padding: 1.2rem; }
+    .author-box h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .author-box p { font-size: 0.82rem; color: var(--mid); }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: #888; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; margin-top: 3rem; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; }
+
+    @media (max-width: 900px) {
+      .article-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .related-grid { grid-template-columns: 1fr; }
+      .hero-img { height: 260px; }
+    }
+    @media (max-width: 600px) {
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-label">Breaking</div>
+  <div class="ticker-track">
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="container">
+    <a href="index.html"><div class="masthead-title">Daily<span>Drift</span></div></a>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="category.html" class="active">World</a>
+  <a href="#">Politics</a>
+  <a href="#">Business</a>
+  <a href="#">Technology</a>
+  <a href="#">Science</a>
+  <a href="#">Culture</a>
+  <a href="#">Opinion</a>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-wrap">
+
+      <!-- ARTICLE -->
+      <article class="article-main">
+        <div class="breadcrumb"><a href="index.html">Home</a> › <a href="category.html">World</a> › <span>Climate Accord</span></div>
+        <div class="article-eyebrow">World · Top Story</div>
+        <h1 class="article-title">Global Climate Accord Marks a Turning Point as 180 Nations Commit to Net-Zero by 2045</h1>
+        <p class="article-deck">In an unprecedented show of international solidarity, delegates signed the landmark Geneva Climate Accord — setting binding targets for carbon neutrality and establishing a historic green fund.</p>
+
+        <div class="article-meta">
+          <span>By <strong>Eleanor Marsh</strong></span>
+          <span class="dot">·</span>
+          <span>June 9, 2026</span>
+          <span class="dot">·</span>
+          <span>6 min read</span>
+          <span class="dot">·</span>
+          <span>World</span>
+        </div>
+
+        <img class="hero-img" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80" alt="Climate summit"/>
+        <p class="img-caption">Delegates gather at the Palais des Nations in Geneva during the signing ceremony. — Photo: UN/Reuters</p>
+
+        <div class="article-body">
+          <p>GENEVA — In what observers are calling the most consequential environmental agreement in a generation, representatives from 180 nations gathered Thursday beneath the vaulted ceilings of the Palais des Nations to sign the Geneva Climate Accord, a sweeping treaty that sets binding carbon neutrality targets for the year 2045 and establishes a $500 billion fund to help developing economies make the transition away from fossil fuels.</p>
+
+          <p>The signing came after three weeks of tense negotiations that nearly collapsed twice — once over the fund's governance structure, and again over language around methane emission reductions. A last-minute compromise brokered by the European Union and a coalition of Pacific Island nations ultimately broke the deadlock.</p>
+
+          <blockquote>
+            <p>"This is not the end of the road — it is the beginning of the hardest part. The world has agreed on the destination. Now we must actually get there."</p>
+            <cite>— Dr. Amara Diallo, UN Climate Envoy</cite>
+          </blockquote>
+
+          <h2>What the Accord Requires</h2>
+          <p>Under the terms of the agreement, signatory nations must submit updated nationally determined contributions (NDCs) every two years, with independent verification by a newly created international body. Countries in the top tier of historical emitters — including the United States, China, the European Union, and India — face the steepest near-term targets, requiring a 45% reduction in greenhouse gas emissions by 2030 relative to 2010 levels.</p>
+
+          <p>The $500 billion Green Transition Fund will be disbursed over ten years, with priority given to nations in sub-Saharan Africa, South and Southeast Asia, and small island developing states — regions that have contributed least to the climate crisis but face its most severe consequences.</p>
+
+          <h2>A Fragile But Historic Consensus</h2>
+          <p>The road to Thursday's ceremony was anything but smooth. Early drafts of the accord were rejected by a bloc of oil-producing nations who objected to language that would have effectively banned new fossil fuel extraction projects after 2028. The final text substitutes that ban with a "managed phase-down" framework that critics say lacks teeth, but that negotiators say was necessary to bring major petrostates on board.</p>
+
+          <p>Environmental groups gave the accord a cautious welcome. Greenpeace International called it "an imperfect but necessary foundation," while the Climate Action Network praised the fund's scale while noting that annual disbursements would need to begin immediately to have any meaningful impact before 2030.</p>
+
+          <p>Markets responded positively to the announcement. Shares in renewable energy companies surged across European and Asian exchanges, while oil futures fell to their lowest level in three months. The clean energy sector has already seen record investment inflows this year, a trend analysts expect the accord to accelerate dramatically.</p>
+
+          <h2>What Comes Next</h2>
+          <p>The accord will enter into force once ratified by at least 100 signatory nations, a threshold negotiators expect to be reached within 18 months. The United States Senate, historically a graveyard for international climate agreements, faces its most significant test yet — though the current administration has indicated it will push for ratification as a top legislative priority in the coming session.</p>
+
+          <p>For the millions of people already living with the consequences of a warming planet — from the flood-ravaged communities of Bangladesh to the wildfire-scorched regions of southern Europe — the accord represents a hard-won but still fragile promise that the world's governments are finally taking the crisis seriously.</p>
+        </div>
+
+        <div class="article-tags">
+          <a href="#" class="tag">Climate</a>
+          <a href="#" class="tag">World</a>
+          <a href="#" class="tag">Geneva</a>
+          <a href="#" class="tag">Environment</a>
+          <a href="#" class="tag">Policy</a>
+        </div>
+
+        <div class="share-bar">
+          <span>Share</span>
+          <button class="share-btn">Twitter</button>
+          <button class="share-btn">Facebook</button>
+          <button class="share-btn">Copy Link</button>
+        </div>
+
+        <!-- RELATED -->
+        <div class="related">
+          <h3>Related Stories</h3>
+          <div class="related-grid">
+            <div class="related-card">
+              <img src="https://images.unsplash.com/photo-1532094349884-543559b8c9d7?w=200&q=80" alt="Science"/>
+              <div>
+                <h4><a href="#">Researchers Achieve Room-Temperature Superconductivity</a></h4>
+                <p>Science · 4 min read</p>
+              </div>
+            </div>
+            <div class="related-card">
+              <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=200&q=80" alt="Markets"/>
+              <div>
+                <h4><a href="#">Markets Surge as Fed Signals Rate Pause Through Year-End</a></h4>
+                <p>Business · 3 min read</p>
+              </div>
+            </div>
+            <div class="related-card">
+              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=200&q=80" alt="Tech"/>
+              <div>
+                <h4><a href="#">Europe's New Data Act Reshapes Consumer Data Rights</a></h4>
+                <p>Technology · 5 min read</p>
+              </div>
+            </div>
+            <div class="related-card">
+              <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80" alt="Economy"/>
+              <div>
+                <h4><a href="#">Housing Costs Push Generation Toward Alternative Living</a></h4>
+                <p>Economy · 5 min read</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-label">Most Read</div>
+          <div class="sidebar-item">
+            <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=200&q=80" alt=""/>
+            <div><h4><a href="#">Senate Passes Historic Infrastructure Bill</a></h4><p>Politics · 8 min read</p></div>
+          </div>
+          <div class="sidebar-item">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&q=80" alt=""/>
+            <div><h4><a href="#">Inside the Race to Build the First Quantum Computer</a></h4><p>Technology · 10 min read</p></div>
+          </div>
+          <div class="sidebar-item">
+            <img src="https://images.unsplash.com/photo-1584467735867-4297ae2ebcee?w=200&q=80" alt=""/>
+            <div><h4><a href="#">Ultra-Processed Foods Linked to Cognitive Decline</a></h4><p>Health · 6 min read</p></div>
+          </div>
+          <div class="sidebar-item">
+            <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=200&q=80" alt=""/>
+            <div><h4><a href="#">Young Readers Are Returning to Print Newspapers</a></h4><p>Culture · 7 min read</p></div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-label">About the Author</div>
+          <div class="author-box">
+            <h4>Eleanor Marsh</h4>
+            <p>Eleanor is DailyDrift's senior world correspondent, based in Geneva. She has covered international climate negotiations for over a decade.</p>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 DailyDrift. All rights reserved.</span>
+      <span><a href="index.html" style="color:#888">← Back to Home</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
