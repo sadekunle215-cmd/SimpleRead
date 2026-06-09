@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DailyDrift — News & Stories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1612;
+      --mid:       #4a4540;
+      --muted:     #9a9490;
+      --rule:      #d8d2ca;
+      --cream:     #faf8f4;
+      --paper:     #ffffff;
+      --accent:    #b5371a;
+      --accent2:   #1a3b5c;
+    }
+
+    html { font-size: 16px; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--accent);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-label {
+      background: var(--ink);
+      padding: 0.45rem 1rem;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .ticker-track {
+      display: flex;
+      animation: ticker 28s linear infinite;
+      white-space: nowrap;
+      padding: 0.45rem 0;
+    }
+    .ticker-track span { padding: 0 2.5rem; }
+    .ticker-track span::after { content: '·'; margin-left: 2.5rem; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: var(--paper);
+      border-bottom: 3px double var(--ink);
+      text-align: center;
+      padding: 2rem 1rem 1.2rem;
+    }
+    .masthead-date {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .masthead-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .masthead-title span { color: var(--accent); }
+    .masthead-tagline {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+    .masthead-rule {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+    }
+    .masthead-rule::before, .masthead-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--ink);
+    }
+    .masthead-rule span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--ink);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    nav a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ccc;
+      padding: 0.7rem 1.4rem;
+      border-right: 1px solid #333;
+      transition: color 0.2s, background 0.2s;
+    }
+    nav a:first-child { border-left: 1px solid #333; }
+    nav a:hover, nav a.active { color: #fff; background: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── HERO GRID ── */
+    .hero { padding: 2.5rem 0 0; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      grid-template-rows: auto auto;
+      gap: 0;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+    }
+
+    /* Lead story */
+    .lead {
+      grid-row: 1 / 3;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+    }
+    .lead img { height: 360px; }
+    .lead-body { padding: 1.8rem 2rem 2rem; flex: 1; }
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .lead-body h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+    .lead-body h1 a:hover { color: var(--accent); }
+    .lead-body p {
+      font-size: 1rem;
+      color: var(--mid);
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .byline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+      padding-top: 0.8rem;
+      margin-top: auto;
+    }
+    .byline strong { color: var(--ink); font-weight: 500; }
+
+    /* Side stories */
+    .side-top, .side-bot {
+      padding: 1.4rem 1.6rem;
+    }
+    .side-top {
+      border-bottom: 1px solid var(--rule);
+    }
+    .side-top img, .side-bot img { height: 140px; margin-bottom: 0.9rem; }
+    .side-top h2, .side-bot h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .side-top h2 a:hover, .side-bot h2 a:hover { color: var(--accent); }
+    .side-top p, .side-bot p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0 1.5rem;
+    }
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .section-head::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--ink);
+    }
+
+    /* ── CARD GRID ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+    }
+    .card img { height: 190px; }
+    .card-body { padding: 1.2rem 1.3rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .card-body h3 a:hover { color: var(--accent); }
+    .card-body p {
+      font-size: 0.875rem;
+      color: var(--mid);
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--accent2);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── TWO COL: LIST + OPINION ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* List articles */
+    .list-article {
+      display: flex;
+      gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .list-article img { width: 110px; height: 80px; flex-shrink: 0; }
+    .list-article h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.3rem;
+    }
+    .list-article h3 a:hover { color: var(--accent); }
+    .list-article p { font-size: 0.82rem; color: var(--mid); }
+    .list-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* Opinion sidebar */
+    .opinion-box {
+      background: var(--ink);
+      color: #fff;
+      padding: 1.8rem;
+    }
+    .opinion-box .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #333;
+    }
+    .opinion-item { margin-bottom: 1.4rem; padding-bottom: 1.4rem; border-bottom: 1px solid #2a2a2a; }
+    .opinion-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .opinion-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.35;
+      margin-bottom: 0.4rem;
+    }
+    .opinion-item h4 a:hover { color: var(--accent); }
+    .opinion-author {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: #888;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: #888;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2rem;
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 0.7rem;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-col h5 {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .footer-col a {
+      display: block;
+      color: #888;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+      font-size: 0.72rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .lead { grid-row: auto; border-right: none; border-bottom: 1px solid var(--rule); }
+      .side-top { border-bottom: 1px solid var(--rule); }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .card-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-label">Breaking</div>
+  <div class="ticker-track">
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+    <span>Global markets rally as inflation data comes in below forecast</span>
+    <span>UN climate summit reaches historic agreement on carbon targets</span>
+    <span>Tech giants face new antitrust scrutiny from EU regulators</span>
+    <span>Scientists announce breakthrough in renewable energy storage</span>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="container">
+    <div class="masthead-date" id="date-display"></div>
+    <div class="masthead-title">Daily<span>Drift</span></div>
+    <div class="masthead-tagline">Trusted reporting. Honest perspectives. Every day.</div>
+    <div class="masthead-rule"><span>Est. 2024</span></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="active">Home</a>
+  <a href="#">World</a>
+  <a href="#">Politics</a>
+  <a href="#">Business</a>
+  <a href="#">Technology</a>
+  <a href="#">Science</a>
+  <a href="#">Culture</a>
+  <a href="#">Opinion</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+
+        <!-- Lead -->
+        <article class="lead">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80" alt="Lead story"/>
+          <div class="lead-body">
+            <div class="eyebrow">World · Top Story</div>
+            <h1><a href="#">Global Climate Accord Marks a Turning Point as 180 Nations Commit to Net-Zero by 2045</a></h1>
+            <p>In an unprecedented show of international solidarity, delegates from 180 nations signed the landmark Geneva Climate Accord late Thursday, setting binding targets for carbon neutrality and establishing a $500 billion fund to assist developing economies in their green transitions.</p>
+            <div class="byline">By <strong>Eleanor Marsh</strong> &nbsp;·&nbsp; June 9, 2026 &nbsp;·&nbsp; 6 min read</div>
+          </div>
+        </article>
+
+        <!-- Side top -->
+        <article class="side-top">
+          <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="Side story"/>
+          <div class="eyebrow">Technology</div>
+          <h2><a href="#">AI Chip Exports Draw New Restrictions as Geopolitical Tensions Rise</a></h2>
+          <p>Washington moves to tighten controls on advanced semiconductor shipments amid growing concerns over military applications abroad.</p>
+        </article>
+
+        <!-- Side bottom -->
+        <article class="side-bot">
+          <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" alt="Side story"/>
+          <div class="eyebrow">Business</div>
+          <h2><a href="#">Markets Surge as Fed Signals Rate Pause Through Year-End</a></h2>
+          <p>Investors cheered the Federal Reserve's dovish tone, sending the S&P 500 to a record close for the third consecutive session.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- LATEST NEWS -->
+    <div class="section-head"><h2>Latest News</h2></div>
+    <div class="card-grid">
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1532094349884-543559b8c9d7?w=600&q=80" alt="Science"/>
+        <div class="card-body">
+          <div class="tag">Science</div>
+          <h3><a href="#">Researchers Achieve Room-Temperature Superconductivity in Lab Setting</a></h3>
+          <p>A team at MIT has demonstrated stable superconductivity at room temperature, a discovery that could revolutionize energy transmission and computing.</p>
+          <div class="card-meta"><span>Dr. Yuki Tanaka</span><span>4 min read</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80" alt="Tech"/>
+        <div class="card-body">
+          <div class="tag">Technology</div>
+          <h3><a href="#">Europe's New Data Act Reshapes How Businesses Handle Consumer Information</a></h3>
+          <p>The sweeping legislation, effective July 1st, mandates data portability and gives consumers unprecedented control over personal data held by corporations.</p>
+          <div class="card-meta"><span>Marcus Drell</span><span>5 min read</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=600&q=80" alt="Culture"/>
+        <div class="card-body">
+          <div class="tag">Culture</div>
+          <h3><a href="#">The Renaissance of Print: Why Young Readers Are Returning to Newspapers</a></h3>
+          <p>Amid digital fatigue and misinformation concerns, a growing demographic of readers under 35 are rediscovering the ritual of reading a printed paper.</p>
+          <div class="card-meta"><span>Ama Osei</span><span>7 min read</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- LIST + OPINION -->
+    <div class="two-col">
+
+      <!-- List -->
+      <section>
+        <div class="section-head"><h2>In Depth</h2></div>
+
+        <article class="list-article">
+          <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=300&q=80" alt="Politics"/>
+          <div>
+            <div class="eyebrow">Politics</div>
+            <h3><a href="#">Senate Passes Historic Infrastructure Bill After Months of Deadlock</a></h3>
+            <p>The bipartisan bill allocates $1.2 trillion toward roads, bridges, broadband, and clean water systems across all 50 states.</p>
+            <div class="list-meta">James Okoro &nbsp;·&nbsp; 8 min read</div>
+          </div>
+        </article>
+
+        <article class="list-article">
+          <img src="https://images.unsplash.com/photo-1584467735867-4297ae2ebcee?w=300&q=80" alt="Health"/>
+          <div>
+            <div class="eyebrow">Health</div>
+            <h3><a href="#">New Study Links Ultra-Processed Foods to Accelerated Cognitive Decline</a></h3>
+            <p>Researchers tracking 50,000 adults over a decade found strong correlations between diets high in ultra-processed foods and early-onset dementia markers.</p>
+            <div class="list-meta">Dr. Priya Nair &nbsp;·&nbsp; 6 min read</div>
+          </div>
+        </article>
+
+        <article class="list-article">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=80" alt="Tech"/>
+          <div>
+            <div class="eyebrow">Technology</div>
+            <h3><a href="#">Inside the Race to Build the First Practical Quantum Computer</a></h3>
+            <p>IBM, Google, and a cluster of startups are locked in a fierce competition that could redefine computing power within the decade.</p>
+            <div class="list-meta">Sofia Reinholt &nbsp;·&nbsp; 10 min read</div>
+          </div>
+        </article>
+
+        <article class="list-article">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&q=80" alt="Economy"/>
+          <div>
+            <div class="eyebrow">Economy</div>
+            <h3><a href="#">Housing Costs Push a New Generation Toward Alternative Living Arrangements</a></h3>
+            <p>Co-living spaces, micro-apartments, and suburban cooperatives are surging in popularity as homeownership drifts further out of reach for millennials and Gen Z.</p>
+            <div class="list-meta">Lena Kraft &nbsp;·&nbsp; 5 min read</div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- Opinion -->
+      <aside>
+        <div class="section-head"><h2>Opinion</h2></div>
+        <div class="opinion-box">
+          <div class="section-label">Perspectives & Commentary</div>
+
+          <div class="opinion-item">
+            <h4><a href="#">The Climate Accord Is a Start — But Implementation Will Be Everything</a></h4>
+            <div class="opinion-author">By Eleanor Marsh</div>
+          </div>
+
+          <div class="opinion-item">
+            <h4><a href="#">Why the AI Boom Could Widen, Not Close, the Inequality Gap</a></h4>
+            <div class="opinion-author">By Prof. David Kang</div>
+          </div>
+
+          <div class="opinion-item">
+            <h4><a href="#">Democracy Needs Slow Journalism Now More Than Ever</a></h4>
+            <div class="opinion-author">By Amara Diallo</div>
+          </div>
+
+          <div class="opinion-item">
+            <h4><a href="#">The Fed's Patience Is a Gamble Worth Taking</a></h4>
+            <div class="opinion-author">By Ruth Eisenberg</div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Daily<span>Drift</span></div>
+        <p>Independent journalism for an informed world. We report without fear or favour, guided only by facts and the public interest.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Sections</h5>
+        <a href="#">World</a>
+        <a href="#">Politics</a>
+        <a href="#">Business</a>
+        <a href="#">Technology</a>
+        <a href="#">Science</a>
+        <a href="#">Culture</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About Us</a>
+        <a href="#">Editorial Standards</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 DailyDrift. All rights reserved.</span>
+      <span>Designed for clarity. Built for trust.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Live date in masthead
+  const d = new Date();
+  document.getElementById('date-display').textContent = d.toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+</script>
+
+</body>
+</html>
